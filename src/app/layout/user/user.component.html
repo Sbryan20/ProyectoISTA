@@ -1,0 +1,478 @@
+<section class="bst-section">
+
+  <mat-toolbar class="mat-bar">
+    <nav id="navbar-example2" class="navbar " style="background-color: rgba(39, 46, 86, 255);">
+
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+        (click)="drawer.toggle()" style="margin-top: 8px">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <img src="assets\img\logo_ista.png" style="width: 5%; margin-top: 10px; margin-right: 0px;" />
+      <a class="navbar-brand" href="#" style="color: aliceblue; margin-right: 800px"></a>
+
+      <ul class="nav nav-pills" style="position: relative">
+        <li class="nav-item dropdown">
+          <h1 class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"
+            style="color: aliceblue">
+            {{persona.username}}
+            <img src="assets\img\user_icon-icons.com_66546.png" alt="" style="width: 15%" />
+          </h1>
+
+
+          <ul class="dropdown-menu" style="background-color: gray">
+            <mat-action-list>
+              <button mat-list-item [routerLink]="['/panelusuario/proyecto/configuracionusuario']"> Perfil </button>
+              <button mat-list-item (click)="logout()"> Cerrar sesion </button>
+            </mat-action-list>
+
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </mat-toolbar>
+
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer class="example-sidenav" opened="true" mode="side">
+      <div class="contenedor-perfil">
+        <div>
+          <h4>{{rol}}</h4>
+        </div>
+      </div>
+
+      <ng-container>
+        <div [ngSwitch]="rol">
+          <!--Administrador-->
+          <div class="list-group" *ngSwitchCase="'ROLE_ADMINISTRADOR'">
+            <!--menu administrador usuario-->
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Usuario </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--boton usuario-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyecto/usuario']"
+                routerLinkActive="active">
+                -Lista
+              </button>
+             
+             
+            </mat-expansion-panel>
+            <br />
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Carrera </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--boton usuario-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyecto/carrera']"
+                routerLinkActive="active">
+                -lista carrera
+              </button>
+            </mat-expansion-panel>
+            <br />
+            
+            
+            <!--menu administrador rol-->
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Rol </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--boton persona-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyecto/rol']"
+                routerLinkActive="active">
+                Listado Rol
+              </button>
+
+
+            </mat-expansion-panel>
+            <br />
+
+
+
+            <!--menu administrador persona-->
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Persona </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--boton persona-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyecto/crearpersona']"
+                routerLinkActive="active">
+                Listado Personas
+              </button>
+
+
+            </mat-expansion-panel>
+            <br />
+            <!--menu administrador proyecto-->
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Proyecto </mat-panel-title>
+              </mat-expansion-panel-header>
+              <!--boton proyecto-->
+              <button mat-button class="id-menus" [routerLink]="['/panelusuario/proyecto/proyecto']"
+                routerLinkActive="active">
+                -proyecto
+              </button>
+
+            </mat-expansion-panel>
+            <br />
+            
+          </div>
+          <!--evaluador-->
+          <div class="list-group" *ngSwitchCase="'ROLE_EVALUADOR'">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Firmas de anexos </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/firmarplandeaprondizaje'
+                ]" routerLinkActive="active">
+                -Plan de aprendizaje (Anexo 6)
+              </button>
+              <button mat-button class="id-menus" routerLinkActive="active">
+                -Firmar Informe de aceptacion de alumnos
+              </button>
+            </mat-expansion-panel>
+            <br />
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Entidad Beneficiaria </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" routerLinkActive="active">
+                -Nueva Entidad Beneficiaria
+              </button>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/verentidadesbenefiarias'
+                ]" routerLinkActive="active">
+                -Ver Entidades Creadas
+              </button>
+            </mat-expansion-panel>
+            <br />
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Firmar Informe de Seguimiento y Final
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus">
+                -Firmar Informe de Seguimiento
+              </button>
+              <button mat-button class="id-menus" routerLinkActive="active">
+                -Firmar Informe Final
+              </button>
+            </mat-expansion-panel>
+            <br />
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title> Documentos </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <button mat-button class="id-menus" routerLinkActive="active">
+                Ver Documentos
+              </button>
+            </mat-expansion-panel>
+          </div>
+          <!--monitor-->
+          <div class="list-group" *ngSwitchCase="'ROLE_MONITOR'">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Solicitud de Participación (Anexo 3)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/verconvocatoria1'
+                ]" routerLinkActive="active">
+                -Lista de Convocatorias
+              </button>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/verportulaciones'
+                ]" routerLinkActive="active">
+                -Solicitudes Enviadas
+              </button>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/firmarportulaciones'
+                ]" routerLinkActive="active">
+                -Firmar Aceptación
+              </button>
+            </mat-expansion-panel>
+            <br />
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Registro Diario de Actividades (Anexo 8)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" routerLinkActive="active">
+                -Nuevo Registro de Actividades
+              </button>
+            </mat-expansion-panel>
+            <br />
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Informe de Culminación (Anexo 10)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/nuevoinformedeculminacion'
+                ]" routerLinkActive="active">
+                -Nuevo Informe Culminación
+              </button>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/verinformedeculminación'
+                ]" routerLinkActive="active">
+                -Ver Informes Culminación
+              </button>
+            </mat-expansion-panel>
+          </div>
+          <!--colaborador-->
+          <div class="list-group" *ngSwitchCase="'ROLE_COLABORADOR'">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Solicitud de Participación (Anexo 3)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/verconvocatoria1'
+                ]" routerLinkActive="active">
+                -Lista de Convocatorias
+              </button>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/verportulaciones'
+                ]" routerLinkActive="active">
+                -Solicitudes Enviadas
+              </button>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/firmarportulaciones'
+                ]" routerLinkActive="active">
+                -Firmar Aceptación
+              </button>
+            </mat-expansion-panel>
+            <br />
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Registro Diario de Actividades (Anexo 8)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" routerLinkActive="active">
+                -Nuevo Registro de Actividades
+              </button>
+            </mat-expansion-panel>
+            <br />
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Informe de Culminación (Anexo 10)
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/nuevoinformedeculminacion'
+                ]" routerLinkActive="active">
+                -Nuevo Informe Culminación
+              </button>
+              <button mat-button class="id-menus" [routerLink]="[
+                  '/panelusuario/proyectovinculacion/verinformedeculminación'
+                ]" routerLinkActive="active">
+                -Ver Informes Culminación
+              </button>
+            </mat-expansion-panel>
+          </div>
+        </div>
+        <br />
+      </ng-container>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </mat-drawer-container>
+  <app-footer></app-footer>
+
+  <ng-container *ngIf="issloading">
+    <div class="bss-loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+</section>
+<!-- DIALOGO DE NUEVO -->
+<!-- POP-UP -->
+<div class="modal fade" id="ModalProyectoNuevo" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="tituloCrearProyecto modalTitle"> Crear Proyecto </h3>
+
+      </div>
+      <!-- formulario -->
+
+      <div class="modal-body">
+        <hr class="lineaPop-Up">
+        <div class="contenedor">
+          <form ngNavigateValidate (ngSubmit)="create()">
+            <div class="detalles-proy">
+              <div class="input-box">
+                <span class="detalles">Nombre</span>
+                <input type="text" placeholder="Ingrese el nombre del Proyecto" required [(ngModel)]="Proyecto.nombre"
+                  name="nombre">
+              </div>
+              <div class="input-box">
+                <span class="detalles">Carrera</span>
+                <select name="carrera" class="cboxizq" [(ngModel)]="Proyecto.carrera" name="carrera">
+                  <option disabled>Elija una Carrera</option>
+                  <option value="carrera1">Tecnologia superior en Desarrollo de Software</option>
+                  <option value="carrera2">Tecnologia superior en Análisis Financiero</option>
+                  <option value="carrera3">Ciberseguridad</option>
+                  <option value="carrera4">Entrenamiento Deportivo</option>
+                </select>
+              </div>
+            </div>
+            <div class="detalles-proy">
+
+              <div class="input-calendar">
+                <span class="detalles">Fechas</span>
+                <div class="calendario">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Rango de Fecha</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate placeholder="Fecha Inicio">
+                      <input matEndDate placeholder="Fecha Fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker class="cal-desplegable" #picker></mat-date-range-picker>
+                  </mat-form-field>
+                </div>
+
+              </div>
+              <div class="input-box">
+                <span class="detalles">Usuario</span>
+                <input type="text" placeholder="Ingrese el tipo de proyecto" required [(ngModel)]="Proyecto.usuario"
+                  name="usuario">
+              </div>
+            </div>
+
+            <div class="detalles-proy">
+              <div class="input-box">
+                <span class="detalles">Objetivo Estratégico</span>
+                <input type="text" placeholder="Ingrese el Objetivo Estratégico" required
+                  [(ngModel)]="Proyecto.obj_estrategico" name="obj_estrategico">
+              </div>
+            </div>
+            <div class="detalles-proy">
+              <div class="input-box">
+                <span class="detalles">Objetivo Táctico</span>
+                <input type="text" placeholder="Ingrese el Objetivo Táctico" required [(ngModel)]="Proyecto.obj_tactico"
+                  name="obj_tactico">
+              </div>
+            </div>
+            <div class="detalles-proy">
+              <div class="input-box">
+                <span class="detalles">Objetivo Operativo</span>
+                <input type="text" placeholder="Ingrese el Objetivo Operativo" required
+                  [(ngModel)]="Proyecto.obj_operativo" name="obj_operativo">
+              </div>
+            </div>
+            <div class="detalles-proy">
+              <div class="input-box">
+                <span class="detalles">Estrategia</span>
+                <input type="text" placeholder="Ingrese la estrategia" required [(ngModel)]="Proyecto.estrategia"
+                  name="estrategia">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="boton cancelar" data-bs-dismiss="modal">CANCELAR</button>
+        <button class="boton aceptar" data-bs-toggle="modal" data-bs-target=".bd-example-modal-sm">ACEPTAR</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIALOGO DE EDITAR -->
+<!-- POP-UP -->
+<div class="modal fade" id="ModalProyectoEditar" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="tituloCrearProyecto modalTitle"> Editar Proyecto </h3>
+
+      </div>
+      <!-- formulario -->
+      <div class="modal-body">
+        <hr class="lineaPop-Up">
+        <div class="contenedor">
+          <form action="#" ngNavigateValidate (ngSubmit)="Editar()">
+            <div class="detalles-proy">
+              <div class="input-box">
+                <span class="detalles">Nombre</span>
+                <input type="text" placeholder="Ingrese el nombre del Proyecto" required [(ngModel)]="Proyecto.nombre"
+                  name="nombre">
+              </div>
+              <div class="input-box">
+                <span class="detalles">Carrera</span>
+                <select name="carrera" class="cboxizq" [(ngModel)]="Proyecto.carrera" name="carrera">
+                  <option disabled>Elija una Carrera</option>
+                  <option value="carrera1">Tecnologia superior en Desarrollo de Software</option>
+                  <option value="carrera2">Tecnologia supeior en Análisis Financiero</option>
+                  <option value="carrera3">Ciberseguridad</option>
+                  <option value="carrera4">Entrenamiento Deportivo</option>
+                </select>
+              </div>
+              <div class="input-calendar">
+                <span class="detalles">Fechas</span>
+                <div class="calendario">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Rango de Fecha</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate placeholder="Fecha Inicio">
+                      <input matEndDate placeholder="Fecha Fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+                </div>
+                <div class="input-box">
+                  <span class="detalles1">Usuario</span>
+                  <input type="text" placeholder="Ingrese el tipo de proyecto" required [(ngModel)]="Proyecto.usuario"
+                    name="usuario">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="boton aceptar centrado" (click)="recargar()">ACEPTAR</button>
+      <button class="boton cancelar" data-bs-dismiss="modal">CANCELAR</button>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- DIALOGO DE Guardar -->
+<!-- POP-UP -->
+<div class="modal fade bd-example-modal-sm" role="dialog" id="ModalGuardar" tabindex="-1" aria-hidden="true"
+  aria-labelledby="mySmallModalLabel" data-bs-backdrop="static">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <img src="assets\img\018-advertencia.png" class="advertencia2">
+      <h3 class="seguro1">¿Está seguro de guardar los datos?</h3>
+      <button class="boton aceptar centrado" (click)="recargar()">CONFIRMAR</button>
+      <button class="boton cancelar centrado" data-bs-dismiss="modal">CANCELAR</button>
+    </div>
+  </div>
+</div>
